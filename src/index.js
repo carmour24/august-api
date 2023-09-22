@@ -22,7 +22,7 @@ class August {
   }
 
   async fetch({ method, ...params }) {
-      const baseApiUrl = PLATFORM_URLS[this.config.api]
+      const baseApiUrl = PLATFORM_URLS[this.config.platform]
     // Ensure proper url
       if (!params.url.startsWith(baseApiUrl)) {
       if (!params.url.startsWith('/')) params.url = '/' + params.url
