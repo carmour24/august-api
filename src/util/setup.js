@@ -21,6 +21,7 @@ module.exports = function setup(config = {}) {
   let idType // Auto-detected
   let augustId = config.augustId ?? AUGUST_ID
   let password = config.password ?? AUGUST_PASSWORD
+  let base_api_url = config.api ?? "AUGUST"
 
   if (!apiKey) errors.push(`Missing config.apiKey or AUGUST_API_KEY env var`)
   if (!installId) errors.push(`Missing config.installId or AUGUST_INSTALL_ID env var`)

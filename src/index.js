@@ -11,7 +11,10 @@ const status = require('./methods/status')
 const details = require('./methods/details')
 const subscribe = require('./methods/subscribe')
 
-const API_URL = 'https://api-production.august.com'
+const PLATFORM_URLS = {
+    AUGUST: 'https://api-production.august.com',
+    YALE_HOME: 'https://api.aaecosystem.com'
+}
 
 class August {
   constructor(config) {
@@ -19,10 +22,11 @@ class August {
   }
 
   async fetch({ method, ...params }) {
+      const baseApiUrl = PLATFORM_URLS[this.config.api]
     // Ensure proper url
-    if (!params.url.startsWith(API_URL)) {
+      if (!params.url.startsWith(baseApiUrl)) {
       if (!params.url.startsWith('/')) params.url = '/' + params.url
-      params.url = API_URL + params.url
+      params.url = baseApiUrl + params.url
     }
     try {
       // Keep this `await` - it allows us to catch errors from tiny
