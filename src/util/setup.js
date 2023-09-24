@@ -10,8 +10,7 @@ const DEFAULT_PN_SUB_KEY = 'sub-c-1030e062-0ebe-11e5-a5c2-0619f8945a4f'
  */
 
 module.exports = function setup(config = {}) {
-  let { AUGUST_API_KEY, AUGUST_PN_SUB_KEY, AUGUST_INSTALL_ID, AUGUST_PASSWORD, AUGUST_ID } =
-    process.env
+    let { AUGUST_API_KEY, AUGUST_PN_SUB_KEY, AUGUST_INSTALL_ID, AUGUST_PASSWORD, AUGUST_ID, PLATFORM } = process.env
 
   let errors = []
 
@@ -21,6 +20,7 @@ module.exports = function setup(config = {}) {
   let idType // Auto-detected
   let augustId = config.augustId ?? AUGUST_ID
   let password = config.password ?? AUGUST_PASSWORD
+  let platform = config.platform ?? PLATFORM ?? `AUGUST`
 
   if (!apiKey) errors.push(`Missing config.apiKey or AUGUST_API_KEY env var`)
   if (!installId) errors.push(`Missing config.installId or AUGUST_INSTALL_ID env var`)
@@ -40,5 +40,5 @@ module.exports = function setup(config = {}) {
   if (!password) errors.push(`Missing config.password or AUGUST_PASSWORD env var`)
 
   if (errors.length) throw ReferenceError(`Config errors found:\n${errors.join('\n')}`)
-  else return { apiKey, pnSubKey, installId, idType, augustId, password }
+    else return { apiKey, pnSubKey, installId, idType, augustId, password, platform }
 }
